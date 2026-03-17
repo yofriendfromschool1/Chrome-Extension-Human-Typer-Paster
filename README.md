@@ -99,6 +99,10 @@ No data is sent anywhere — everything runs locally in your browser.
 4. Characters are typed using `document.execCommand('insertText')` for contenteditable elements, or direct value manipulation + `InputEvent` dispatch for input/textarea
 5. Full keyboard events (`keydown`/`keypress`/`keyup`) are dispatched for compatibility with JavaScript frameworks
 
+## Test of it working
+
+https://www.youtube.com/watch?v=y1FZuwaO_GM
+
 ## 📄 License
 
 MIT License
