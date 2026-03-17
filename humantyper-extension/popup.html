@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HumanTyper</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">⌨</div>
+    <div class="title">
+      <h1>HumanTyper</h1>
+      <p class="subtitle">Human-like Typing Simulation</p>
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div id="statusBar" class="status-bar hidden">
+    <div class="status-text" id="statusText">Ready</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="status-stats" id="statusStats"></div>
+  </div>
+
+  <!-- Text Input -->
+  <div class="section">
+    <label class="label">
+      <span class="label-icon">📋</span> Text to Type
+    </label>
+    <textarea id="textInput" placeholder="Paste your text here, or click 'Use Clipboard'..." rows="5"></textarea>
+    <div class="text-actions">
+      <button id="btnClipboard" class="btn btn-sm" title="Read from clipboard">
+        📋 Use Clipboard
+      </button>
+      <span class="char-count" id="charCount">0 chars</span>
+    </div>
+  </div>
+
+  <!-- Basic Settings -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">⚙</span> Basic Settings
+    </div>
+
+    <div class="setting-row">
+      <label>⏱ Delay (sec)</label>
+      <input type="number" id="delay" value="5.0" min="0" max="500" step="0.1" class="input-num">
+    </div>
+
+    <div class="setting-row">
+      <label>⚡ Speed (WPM)</label>
+      <input type="number" id="wpm" value="65" min="10" max="500" step="1" class="input-num">
+    </div>
+
+    <div class="setting-row">
+      <label>💥 Error Rate (%)</label>
+      <input type="number" id="errorRate" value="3.0" min="0" max="15" step="0.1" class="input-num">
+    </div>
+  </div>
+
+  <!-- Advanced Toggle -->
+  <button id="advancedToggle" class="btn-advanced-toggle">
+    🔧 Advanced Settings <span id="advArrow">▸</span>
+  </button>
+
+  <!-- Advanced Settings -->
+  <div id="advancedPanel" class="advanced-panel hidden">
+
+    <!-- Burst Typing -->
+    <div class="section sub-section">
+      <div class="section-header small">
+        <span class="section-icon">🔥</span> Burst Typing
+        <label class="toggle-switch">
+          <input type="checkbox" id="burstEnabled" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div id="burstSettings">
+        <div class="setting-row">
+          <label>Words per burst</label>
+          <input type="number" id="burstWords" value="8" min="1" max="100" step="1" class="input-num">
+        </div>
+        <div class="setting-row">
+          <label>Pause min (sec)</label>
+          <input type="number" id="burstPauseMin" value="2.0" min="0" max="500" step="0.1" class="input-num">
+        </div>
+        <div class="setting-row">
+          <label>Pause max (sec)</label>
+          <input type="number" id="burstPauseMax" value="5.0" min="0" max="500" step="0.1" class="input-num">
+        </div>
+      </div>
+    </div>
+
+    <!-- Word Substitution -->
+    <div class="section sub-section">
+      <div class="section-header small">
+        <span class="section-icon">📝</span> Word Substitution
+        <label class="toggle-switch">
+          <input type="checkbox" id="substituteEnabled" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div id="substituteSettings">
+        <div class="setting-row">
+          <label>Rate (%)</label>
+          <input type="number" id="substituteRate" value="3.0" min="0" max="50" step="0.1" class="input-num">
+        </div>
+        <div class="setting-row">
+          <label>Complexity</label>
+          <select id="substituteComplexity" class="input-select">
+            <option value="simple">Simple (shorter words)</option>
+            <option value="moderate" selected>Moderate (any)</option>
+            <option value="complex">Complex (longer words)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Human Behavior -->
+    <div class="section sub-section">
+      <div class="section-header small">
+        <span class="section-icon">🧠</span> Human-like Behavior
+      </div>
+      <div class="setting-row">
+        <label>Fatigue (%)</label>
+        <input type="number" id="fatigueRate" value="10" min="0" max="30" step="0.5" class="input-num">
+      </div>
+      <div class="setting-row">
+        <label>Para. pause min (sec)</label>
+        <input type="number" id="paragraphPauseMin" value="2.0" min="0" max="500" step="0.1" class="input-num">
+      </div>
+      <div class="setting-row">
+        <label>Para. pause max (sec)</label>
+        <input type="number" id="paragraphPauseMax" value="8.0" min="0" max="500" step="0.1" class="input-num">
+      </div>
+      <div class="setting-row">
+        <label>Long-word hesitation</label>
+        <label class="toggle-switch">
+          <input type="checkbox" id="hesitationEnabled" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <label>Re-reading pauses</label>
+        <label class="toggle-switch">
+          <input type="checkbox" id="rereadingEnabled" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div id="rereadingSettings">
+        <div class="setting-row">
+          <label>Re-read min (sec)</label>
+          <input type="number" id="rereadingPauseMin" value="0.5" min="0" max="500" step="0.1" class="input-num">
+        </div>
+        <div class="setting-row">
+          <label>Re-read max (sec)</label>
+          <input type="number" id="rereadingPauseMax" value="2.0" min="0" max="500" step="0.1" class="input-num">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="actions">
+    <button id="btnStart" class="btn btn-primary btn-lg">
+      ▶ Start Typing
+    </button>
+    <button id="btnStop" class="btn btn-danger btn-lg hidden">
+      ■ Stop
+    </button>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>Click a text field first, then press Start</span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
