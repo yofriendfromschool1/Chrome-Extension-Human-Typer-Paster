@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="icons/icon128.png" alt="HumanTyper" width="96">
+  <img src="humantyper-extension/icons/icon128.png" alt="HumanTyper" width="96">
 </p>
 
 <h1 align="center">⌨️ HumanTyper — Chrome Extension</h1>
