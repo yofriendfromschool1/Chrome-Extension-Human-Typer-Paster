@@ -16,7 +16,7 @@
 </p>
 
 ---
-
+https://chromewebstore.google.com/detail/nmelhfdhhefhclcbpgcgfdpogoklbbih
 ## ✨ Features
 
 - **Works Everywhere** — Types into `<input>`, `<textarea>`, and `contenteditable` elements (Google Docs, Gmail, etc.)
